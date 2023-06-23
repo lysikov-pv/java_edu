@@ -11,7 +11,7 @@ package les_1;
 
 import java.util.Random;
 
-public class les_1 {
+public class les_1d {
 
     public static int getRand(int bound){
         Random random = new Random();
