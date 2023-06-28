@@ -6,6 +6,8 @@
 package les_4;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -147,6 +149,17 @@ public class les_4 {
         }
         return result;
     }
+
+    // public static ArrayList<Integer> sortByGender2(ArrayList<Integer> ids) {
+    //     Collections.sort(ids, new Comparator<Integer>() {
+    //         @Override
+    //         public int compare(Integer o1, Integer o2) {
+    //             return gender.get(o1) - gender.get(o2);
+    //         }           
+    //     });
+    //     return ids;
+    // }
+
 
     public static int[] getIds() {
         int[] result = new int[age.size()];
