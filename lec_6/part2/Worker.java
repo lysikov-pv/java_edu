@@ -1,4 +1,4 @@
-package Lesson_06.part2;
+package lec_6.part2;
 
 public class Worker {
     int id;
