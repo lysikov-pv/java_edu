@@ -1,9 +1,7 @@
 package les_6;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.ArrayList;
 
 public class les_6 {
 
