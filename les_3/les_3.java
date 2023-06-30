@@ -72,5 +72,9 @@ public class les_3 {
 
         System.out.print("\n4) Среднее значение: ");
         System.out.println(getMean(list));
+
+        System.out.print("\n5) Отсортированный список: ");
+        list.sort((o1, o2) -> o1 - o2);
+        System.out.println(list);
     }
 }
