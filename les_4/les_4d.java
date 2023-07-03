@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class les_4 {
+public class les_4d {
     static Scanner iScanner = new Scanner(System.in);
     static ArrayList <String> lastname = new ArrayList<>();
     static ArrayList <String> name = new ArrayList<>();
