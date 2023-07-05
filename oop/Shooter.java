@@ -16,7 +16,7 @@ public abstract class Shooter extends Creature {
      * @param cost Стоимость
      * @param maxShots Кол-во выстрелов
      */
-    public Shooter(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost, int maxShots) {
+    protected Shooter(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost, int maxShots) {
         super(number, name, qty, maxHp, attack, defense, minDamage, maxDamage, cost);
         this.maxShots = maxShots;
     }

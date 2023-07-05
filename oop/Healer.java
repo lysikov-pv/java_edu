@@ -17,7 +17,7 @@ public abstract class Healer extends Shooter {
      * @param maxShoots // Кол-во выстрелов
      * @param healing // Лечение
      */
-    public Healer(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost, int maxShoots, int healing) {
+    protected Healer(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost, int maxShoots, int healing) {
         super(number, name, qty, maxHp, attack, defense, minDamage, maxDamage, cost, maxShoots);
         this.healing = healing;
     }
