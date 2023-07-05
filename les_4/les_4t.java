@@ -14,6 +14,9 @@ public class les_4t {
         return result;
     }
 
+    /**
+     * 1. Пусть дан LinkedList с несколькими элементами. Реализуйте метод, который вернет “перевернутый” список.
+     */
     public static void task_1(){
         System.out.println("=".repeat(20));
         System.out.println("Задача 1: ");
@@ -27,6 +30,12 @@ public class les_4t {
         System.out.println("Перевернутый список: " + revert(list));
     }
 
+    /**
+     * 2*. Реализуйте очередь с помощью LinkedList со следующими методами:
+     * enqueue() - помещает элемент в конец очереди,
+     * dequeue() - возвращает первый элемент из очереди и удаляет его,
+     * first() - возвращает первый элемент из очереди, не удаляя.
+     */
     public static void task_2(){
         System.out.println("=".repeat(20));
         System.out.println("Задача 2: ");
@@ -45,6 +54,9 @@ public class les_4t {
         System.out.printf("Выталкиваем первый элемент очереди: %d\n", queue.dequeue());
     }
 
+    /**
+     * 3. В калькулятор (урок 1 и 2) добавьте возможность отменить последнюю операцию.
+     */
     public static void task_3() {
         while (true) {
             int i=0;
@@ -65,7 +77,7 @@ public class les_4t {
                 str[i] = iScanner.nextLine();
                 if (exit = str[i].equals("q")) break;
                 if (((i == 0 || i == 2) && str[i].matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) ||
-                    (i == 1 && (str[i].equals("+") || str[i].equals("-") || str[i].equals("*") || str[i].equals("/")))) i++;
+                    (i == 1 && str[i].matches("[+-/*]"))) i++;
                 else if (str[i].equals("z")) i--;
             }
 
