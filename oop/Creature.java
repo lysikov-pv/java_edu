@@ -24,7 +24,7 @@ public abstract class Creature {
      * @param maxDamage Максимальный урон
      * @param cost Стоимость
      */
-    public Creature(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost) {
+    protected Creature(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost) {
         this.number = number;
         this.name = name;
         this.qty = qty;

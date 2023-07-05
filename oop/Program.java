@@ -7,7 +7,7 @@ public class Program {
 
     public static Random random = new Random();
     public static void main(String[] args) {
-
+     
         ArrayList<Creature> army1 = new ArrayList<>();
         army1.add(new Mage(random.nextInt(1, 21)));
         army1.add(new Sharpshooter(random.nextInt(1, 51)));
@@ -26,6 +26,6 @@ public class Program {
         System.out.println("\nАрмия 2:");
         for (Creature creature : army2) {
             System.out.println(creature);
-        }
+        }    
     }
 }
