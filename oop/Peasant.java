@@ -1,18 +1,20 @@
 package oop;
 
 public class Peasant extends Creature {
-    protected static int number;
-    private static final int MAX_HP = 1;
-    private static final int ATTACK = 1;
-    private static final int DEFENSE = 1;
-    private static final int MIN_DAMAGE = 1;
-    private static final int MAX_DAMAGE = 1;
-    private static final int COST = 10;
+    protected static int number = 0;
     /**
      * Конструктор
      * @param qty Количество
      */
     public Peasant(int qty) {
-        super(++Peasant.number, "Крестьянин", qty, MAX_HP, ATTACK, DEFENSE, MIN_DAMAGE, MAX_DAMAGE, COST);
+        super(qty,
+                ++Peasant.number,
+                CreaturesSkills.Peasant.NAME,
+                CreaturesSkills.Peasant.MAX_HP,
+                CreaturesSkills.Peasant.ATTACK,
+                CreaturesSkills.Peasant.DEFENCE,
+                CreaturesSkills.Peasant.MIN_DAMAGE,
+                CreaturesSkills.Peasant.MAX_DAMAGE,
+                CreaturesSkills.Peasant.COST);
     }
 }

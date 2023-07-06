@@ -1,6 +1,6 @@
 package oop;
 
-public abstract class Creature {
+public abstract class Creature implements CreaturesActions{
     protected int number; // Порядковый номер
     protected String name; // Название существа
     private int qty; // Количество
@@ -14,17 +14,18 @@ public abstract class Creature {
 
     /**
      * Конструктор существа
-     * @param number Порядковый номер
-     * @param name Название существа
-     * @param qty Количество
-     * @param maxHp Здоровье
-     * @param attack Атака
-     * @param defense Защита
+     *
+     * @param qty       Количество
+     * @param number    Порядковый номер
+     * @param name      Название существа
+     * @param maxHp     Здоровье
+     * @param attack    Атака
+     * @param defense   Защита
      * @param minDamage Минимальный урон
      * @param maxDamage Максимальный урон
-     * @param cost Стоимость
+     * @param cost      Стоимость
      */
-    protected Creature(int number, String name, int qty, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost) {
+    protected Creature(int qty, int number, String name, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost) {
         this.number = number;
         this.name = name;
         this.qty = qty;
@@ -40,5 +41,14 @@ public abstract class Creature {
     public String toString() {
         return String.format("Существо: %s #%d, Кол-во: %d",
                 this.name, this.number, this.qty);
+    }
+
+    public String getInfo() {
+        return String.format("Существо: %s #%d, Кол-во: %d",
+                this.name, this.number, this.qty);
+    }
+
+    public void step() {
+
     }
 }

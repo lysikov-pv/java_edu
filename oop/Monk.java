@@ -1,20 +1,22 @@
 package oop;
 
 public class Monk extends Healer {
-    protected static int number;
-    private static final int MAX_HP = 30;
-    private static final int ATTACK = 12;
-    private static final int DEFENSE = 7;
-    private static final int MIN_DAMAGE = 10;
-    private static final int MAX_DAMAGE = 12;
-    private static final int COST = 400;
-    private static final int MAX_SHOOTS = 12;
-    private static final int HEALING = 2;
+    protected static int number = 0;
     /**
      * Конструктор
      * @param qty Количество
      */
     public Monk(int qty) {
-        super(++Monk.number, "Монах", qty, MAX_HP, ATTACK, DEFENSE, MIN_DAMAGE, MAX_DAMAGE, COST, MAX_SHOOTS, HEALING);
+        super(qty,
+                ++Monk.number,
+                CreaturesSkills.Monk.NAME,
+                CreaturesSkills.Monk.MAX_HP,
+                CreaturesSkills.Monk.ATTACK,
+                CreaturesSkills.Monk.DEFENCE,
+                CreaturesSkills.Monk.MIN_DAMAGE,
+                CreaturesSkills.Monk.MAX_DAMAGE,
+                CreaturesSkills.Monk.COST,
+                CreaturesSkills.Monk.MAX_SHOOTS,
+                CreaturesSkills.Monk.HEALING);
     }
 }
