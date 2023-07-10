@@ -3,10 +3,10 @@ package les_6;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class les_6 {
+public class les_6p {
 
     public static void main(String[] args) {
-        MySet<Integer> mSet = new MySet<>();
+        MySet<Integer> mSet = new MySet<Integer>();
         System.out.println(mSet.add(12));
         System.out.println(mSet.add(14));
         System.out.println(mSet.add(12));
