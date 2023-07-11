@@ -1,6 +1,4 @@
-package codewars.t001;
-
-import java.util.Arrays;
+package codewars.fundamentals;
 
 /**
  Complete the solution so that it reverses the string passed into it.

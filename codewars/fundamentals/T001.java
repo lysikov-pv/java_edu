@@ -1,4 +1,4 @@
-package codewars.t001;
+package codewars.fundamentals;
 
 /**
  * Can you find the needle in the haystack?
