@@ -20,6 +20,7 @@ public class Sharpshooter extends Shooter {
                 CreaturesSkills.Sharpshooter.MIN_DAMAGE,
                 CreaturesSkills.Sharpshooter.MAX_DAMAGE,
                 CreaturesSkills.Sharpshooter.COST,
+                CreaturesSkills.Sharpshooter.IMITIATIVE,
                 CreaturesSkills.Sharpshooter.MAX_SHOOTS);
     }
 }

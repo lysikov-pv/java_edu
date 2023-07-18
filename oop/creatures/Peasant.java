@@ -21,6 +21,7 @@ public class Peasant extends Creature {
                 CreaturesSkills.Peasant.DEFENCE,
                 CreaturesSkills.Peasant.MIN_DAMAGE,
                 CreaturesSkills.Peasant.MAX_DAMAGE,
-                CreaturesSkills.Peasant.COST);
+                CreaturesSkills.Peasant.COST,
+                CreaturesSkills.Peasant.IMITIATIVE);
     }
 }

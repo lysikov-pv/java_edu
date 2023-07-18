@@ -22,7 +22,7 @@ public class Mage extends Healer {
                 CreaturesSkills.Mage.MIN_DAMAGE,
                 CreaturesSkills.Mage.MAX_DAMAGE,
                 CreaturesSkills.Mage.COST,
-                CreaturesSkills.Mage.MAX_SHOOTS,
-                CreaturesSkills.Mage.HEALING);
+                CreaturesSkills.Mage.IMITIATIVE,
+                CreaturesSkills.Mage.MAX_SHOOTS, CreaturesSkills.Mage.HEALING);
     }
 }

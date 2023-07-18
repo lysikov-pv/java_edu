@@ -22,7 +22,7 @@ public class Monk extends Healer {
                 CreaturesSkills.Monk.MIN_DAMAGE,
                 CreaturesSkills.Monk.MAX_DAMAGE,
                 CreaturesSkills.Monk.COST,
-                CreaturesSkills.Monk.MAX_SHOOTS,
-                CreaturesSkills.Monk.HEALING);
+                CreaturesSkills.Monk.IMITIATIVE,
+                CreaturesSkills.Monk.MAX_SHOOTS, CreaturesSkills.Monk.HEALING);
     }
 }

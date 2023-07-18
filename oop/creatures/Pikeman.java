@@ -21,6 +21,7 @@ public class Pikeman extends Creature {
                 CreaturesSkills.Pikeman.DEFENCE,
                 CreaturesSkills.Pikeman.MIN_DAMAGE,
                 CreaturesSkills.Pikeman.MAX_DAMAGE,
-                CreaturesSkills.Pikeman.COST);
+                CreaturesSkills.Pikeman.COST,
+                CreaturesSkills.Pikeman.IMITIATIVE);
     }
 }

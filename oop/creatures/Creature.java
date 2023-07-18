@@ -5,33 +5,35 @@ import java.util.ArrayList;
 public abstract class Creature implements CreaturesActions{
     protected int number; // Порядковый номер
     protected String name; // Название существа
-    private int qty; // Количество
-    private int hp; // Здоровье 
-    private int maxHp; // Максимальное здоровье
-    private int attack;  // Атака
-    private int defense; // Защита
-    private int minDamage; // Минимальный урон
-    private int maxDamage; // Максимальный урон
-    private int cost; // Стоимость
+    protected int qty; // Количество
+    protected int hp; // Текущее здоровье
+    protected int maxHp; // Максимальное здоровье
+    protected int attack;  // Атака
+    protected int defense; // Защита
+    protected int minDamage; // Минимальный урон
+    protected int maxDamage; // Максимальный урон
+    protected int cost; // Стоимость
+    protected  int initiative; // Инициатива
 
-    private Position position; // Координаты
+    protected Position position; // Координаты
 
     /**
      * Конструктор существа
      *
-     * @param qty       Количество
-     * @param x         Координата X
-     * @param y         Координата Y
-     * @param number    Порядковый номер
-     * @param name      Название существа
-     * @param maxHp     Здоровье
-     * @param attack    Атака
-     * @param defense   Защита
-     * @param minDamage Минимальный урон
-     * @param maxDamage Максимальный урон
-     * @param cost      Стоимость
+     * @param qty        Количество
+     * @param x          Координата X
+     * @param y          Координата Y
+     * @param number     Порядковый номер
+     * @param name       Название существа
+     * @param maxHp      Максимальное здоровье
+     * @param attack     Атака
+     * @param defense    Защита
+     * @param minDamage  Минимальный урон
+     * @param maxDamage  Максимальный урон
+     * @param cost       Стоимость
+     * @param initiative Инициатива
      */
-    protected Creature(int qty, int x, int y, int number, String name, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost) {
+    protected Creature(int qty, int x, int y, int number, String name, int maxHp, int attack, int defense, int minDamage, int maxDamage, int cost, int initiative) {
         this.name = name;
         this.number = number;
         this.qty = qty;
@@ -43,6 +45,11 @@ public abstract class Creature implements CreaturesActions{
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
         this.cost = cost;
+        this.initiative = initiative;
+    }
+
+    public int getInitiative() {
+        return initiative;
     }
 
     public String toString() {
@@ -55,13 +62,29 @@ public abstract class Creature implements CreaturesActions{
                 name, number, qty, position.x, position.y);
     }
 
-    public void step(ArrayList<Creature> enemies) {
+    public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
         Creature nearestEnemy = findNearestEnemy(enemies);
         System.out.print(getInfo());
         System.out.printf(" -> Ближайшее существо: %s #%d; Растояние: %d \n",
                 nearestEnemy.name,
                 nearestEnemy.number,
                 (int)Math.ceil(position.getDistance(nearestEnemy.position)));
+    }
+
+    public void getDemage(int demage) {
+        int qtyDemage = demage / maxHp;
+        if (qtyDemage < qty) {
+            qty -= qtyDemage;
+            hp -= demage - qtyDemage * maxHp;
+        }
+        else {
+            die();
+        }
+    }
+
+    public void die() {
+        qty = 0;
+        hp = 0;
     }
 
     protected Creature findNearestEnemy(ArrayList<Creature> enemies) {

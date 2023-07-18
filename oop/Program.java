@@ -10,6 +10,7 @@ public class Program {
     public static Random random = new Random();
     public static ArrayList<Creature> army1 = new ArrayList<>();
     public static ArrayList<Creature> army2 = new ArrayList<>();
+
     public static void create_army_manually() {
 
         army1.add(new Mage(random.nextInt(1, 21), 1, 1));
@@ -90,13 +91,31 @@ public class Program {
 
     }
     public static void do_step() {
-        System.out.println("\nАрмия 1:");
-        army1.forEach(creature -> creature.step(army2));
-        System.out.println("\nАрмия 2:");
-        army2.forEach(creature -> creature.step(army1));
+
+//        System.out.println("\nАрмия 1:");
+//        army1.forEach(creature -> creature.step(army2, army1));
+//        System.out.println("\nАрмия 2:");
+//        army2.forEach(creature -> creature.step(army1, army2));
+
+        ArrayList<Creature> initiativeList = new ArrayList<>();
+        initiativeList.addAll(army1);
+        initiativeList.addAll(army2);
+        initiativeList.sort(((o1, o2) -> o2.getInitiative() - o1.getInitiative()));
+        int i = 0;
+        for (Creature creature: initiativeList) {
+            System.out.printf("Ход %d\n", ++i);
+            if (army1.contains(creature)) {
+                creature.step(army2, army1);
+            }
+            else {
+                creature.step(army1, army2);
+            }
+        }
+
     }
     public static void main(String[] args) {
         create_army_randomly();
+        System.out.println("");
         do_step();
     }
 }

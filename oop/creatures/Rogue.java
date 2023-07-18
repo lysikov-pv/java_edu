@@ -21,6 +21,7 @@ public class Rogue extends Creature {
                 CreaturesSkills.Rogue.DEFENCE,
                 CreaturesSkills.Rogue.MIN_DAMAGE,
                 CreaturesSkills.Rogue.MAX_DAMAGE,
-                CreaturesSkills.Rogue.COST);
+                CreaturesSkills.Rogue.COST,
+                CreaturesSkills.Rogue.IMITIATIVE);
     }
 }

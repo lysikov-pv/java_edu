@@ -22,6 +22,7 @@ public class Archer extends Shooter {
                 CreaturesSkills.Archer.MIN_DAMAGE,
                 CreaturesSkills.Archer.MAX_DAMAGE,
                 CreaturesSkills.Archer.COST,
+                CreaturesSkills.Archer.IMITIATIVE,
                 CreaturesSkills.Archer.MAX_SHOOTS);
     }
 }
