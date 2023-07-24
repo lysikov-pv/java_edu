@@ -42,8 +42,10 @@ public abstract class Shooter extends Creature {
         nearestEnemy.getDemage(demage);
         boolean savedShoot = false;
         for (Creature allie: allies) {
-            if (allie.name.equals("Крестьянин")) {
+            if (allie.name.equals("Крестьянин") && allie.action.equals(CreaturesActions.waiting)) {
                 savedShoot = true;
+                allie.action = CreaturesActions.givesArrow;
+                break;
             }
         }
         System.out.printf(" -> Выстрелил в: %s #%d; Нанес урон: %d; Осталось стрел: %d(-%d)\n",

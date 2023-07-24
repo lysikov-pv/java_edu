@@ -1,9 +1,5 @@
 package oop.creatures;
 
-import java.util.ArrayList;
-
-public interface CreaturesActions {
-    String getInfo();
-
-    void step(ArrayList<Creature> enemies, ArrayList<Creature> allies);
+public enum CreaturesActions {
+    waiting, move, givesArrow, dies, died, attacks;
 }

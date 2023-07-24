@@ -1,5 +1,7 @@
 package oop.creatures;
 
+import java.util.Objects;
+
 public class Position {
     int x; // 1..15
     int y; // 1..11
@@ -13,5 +15,13 @@ public class Position {
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
     }
 }

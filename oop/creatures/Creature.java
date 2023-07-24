@@ -2,7 +2,7 @@ package oop.creatures;
 
 import java.util.ArrayList;
 
-public abstract class Creature implements CreaturesActions{
+public abstract class Creature implements CreaturesInterface {
     protected int number; // Порядковый номер
     protected String name; // Название существа
     protected int qty; // Количество
@@ -13,9 +13,11 @@ public abstract class Creature implements CreaturesActions{
     protected int minDamage; // Минимальный урон
     protected int maxDamage; // Максимальный урон
     protected int cost; // Стоимость
-    protected  int initiative; // Инициатива
+    protected int initiative; // Инициатива
 
     protected Position position; // Координаты
+    protected CreaturesActions action; // Действие
+
 
     /**
      * Конструктор существа
@@ -46,19 +48,32 @@ public abstract class Creature implements CreaturesActions{
         this.maxDamage = maxDamage;
         this.cost = cost;
         this.initiative = initiative;
+        action = CreaturesActions.waiting;
     }
 
     public int getInitiative() {
         return initiative;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
     public String toString() {
-        return String.format("Существо: %s #%d; Кол-во: %d; Координаты: (%d , %d)",
+        return String.format("%s #%d [Кол-во: %d]",
                 name, number, qty, position.x, position.y);
     }
 
+    public String toChar() {
+        return name.substring(0,2);
+    }
+
     public String getInfo() {
-        return String.format("Существо: %s #%d; Кол-во: %d; Координаты: (%d , %d)",
+        return String.format("%s #%d [Кол-во: %d]",
                 name, number, qty, position.x, position.y);
     }
 
@@ -85,6 +100,7 @@ public abstract class Creature implements CreaturesActions{
     public void die() {
         qty = 0;
         hp = 0;
+        action = CreaturesActions.died;
     }
 
     protected Creature findNearestEnemy(ArrayList<Creature> enemies) {

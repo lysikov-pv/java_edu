@@ -1,5 +1,7 @@
 package oop.creatures;
 
+import java.util.ArrayList;
+
 public class Peasant extends Creature {
     protected static int number = 0;
 
@@ -23,5 +25,12 @@ public class Peasant extends Creature {
                 CreaturesSkills.Peasant.MAX_DAMAGE,
                 CreaturesSkills.Peasant.COST,
                 CreaturesSkills.Peasant.IMITIATIVE);
+    }
+
+    @Override
+    public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
+//        super.step(enemies, allies);
+        if (hp <= 0) return;
+        action = CreaturesActions.waiting;
     }
 }
