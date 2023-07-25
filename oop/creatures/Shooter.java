@@ -34,12 +34,12 @@ public abstract class Shooter extends Creature {
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
         // super.step(enemies);
         System.out.print(getInfo());
-        Creature nearestEnemy = findNearestEnemy(enemies);
         if (hp <= 0) return;
         if (shoots <= 0) return;
-        int demage = (maxDamage - minDamage) / 2 + minDamage;
 
-        nearestEnemy.getDemage(demage);
+        Creature nearestEnemy = findNearest(enemies);
+        int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
+        nearestEnemy.doDamage(damage);
         boolean savedShoot = false;
         for (Creature allie: allies) {
             if (allie.name.equals("Крестьянин") && allie.action.equals(CreaturesActions.waiting)) {
@@ -48,12 +48,12 @@ public abstract class Shooter extends Creature {
                 break;
             }
         }
-        System.out.printf(" -> Выстрелил в: %s #%d; Нанес урон: %d; Осталось стрел: %d(-%d)\n",
+        System.out.printf(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось стрел: %d(-%d)\n",
                 nearestEnemy.name,
                 nearestEnemy.number,
-                demage,
+                damage,
                 shoots,
-                savedShoot?0:1);
+                savedShoot ? 0 : 1);
 
         if (savedShoot) return; else shoots--;
     }

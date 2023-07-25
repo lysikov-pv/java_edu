@@ -45,19 +45,19 @@ public class View {
         }
         public static void view() {
             if (step == 1 ){
-                System.out.print(AnsiColors.ANSI_YELLOW + "First step " + AnsiColors.ANSI_RESET);
+                System.out.print(AnsiColors.ANSI_YELLOW + "Начало " + AnsiColors.ANSI_RESET);
             } else {
-                System.out.print(AnsiColors.ANSI_YELLOW + "Step " + step + AnsiColors.ANSI_RESET);
+                System.out.print(AnsiColors.ANSI_YELLOW + "Шаг " + step + " " + AnsiColors.ANSI_RESET);
             }
             step++;
             Program.allCreatures.forEach((v) -> l[0] = Math.max(l[0], v.getInfo().length()));
-            System.out.print("_".repeat(l[0]*2));
+            System.out.print("_".repeat(l[0]*3));
             System.out.println("");
             System.out.print(top10 + "    ");
-            System.out.print(AnsiColors.ANSI_GREEN+"Green side"+AnsiColors.ANSI_RESET);
+            System.out.print(AnsiColors.ANSI_GREEN + "Зеленая армия" + AnsiColors.ANSI_RESET);
             //for (int i = 0; i < l[0]-9; i++)
-            System.out.print(" ".repeat(l[0]-9));
-            System.out.println(AnsiColors.ANSI_BLUE+" Blue side"+AnsiColors.ANSI_RESET);
+            System.out.print(" ".repeat(l[0]-10));
+            System.out.println(AnsiColors.ANSI_BLUE + "Синяя армия" + AnsiColors.ANSI_RESET);
             for (int i = 1; i < 11; i++) {
                 System.out.print(getChar(1, i));
             }

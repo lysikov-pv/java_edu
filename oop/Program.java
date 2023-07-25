@@ -101,7 +101,6 @@ public class Program {
                 creature.step(army1, army2);
             }
         }
-
     }
     public static void main(String[] args) {
         create_army_randomly();

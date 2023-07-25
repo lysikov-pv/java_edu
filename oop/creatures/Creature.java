@@ -78,7 +78,7 @@ public abstract class Creature implements CreaturesInterface {
     }
 
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
-        Creature nearestEnemy = findNearestEnemy(enemies);
+        Creature nearestEnemy = findNearest(enemies);
         System.out.print(getInfo());
         System.out.printf(" -> Ближайшее существо: %s #%d; Растояние: %d \n",
                 nearestEnemy.name,
@@ -86,15 +86,22 @@ public abstract class Creature implements CreaturesInterface {
                 (int)Math.ceil(position.getDistance(nearestEnemy.position)));
     }
 
-    public void getDemage(int demage) {
-        int qtyDemage = demage / maxHp;
-        if (qtyDemage < qty) {
-            qty -= qtyDemage;
-            hp -= demage - qtyDemage * maxHp;
+    public void doDamage(int damage) {
+        int qtyDamage = damage / maxHp;
+        if (qtyDamage < qty) {
+            qty -= qtyDamage;
+            hp -= damage - qtyDamage * maxHp;
         }
         else {
             die();
         }
+    }
+
+    public int doHeal(int healing) {
+        int damage = maxHp - hp;
+        int healingPoints = (damage > healing) ? healing : damage;
+        hp += healingPoints;
+        return healingPoints;
     }
 
     public void die() {
@@ -103,16 +110,16 @@ public abstract class Creature implements CreaturesInterface {
         action = CreaturesActions.died;
     }
 
-    protected Creature findNearestEnemy(ArrayList<Creature> enemies) {
-        double minDistance = position.getDistance(enemies.get(0).position);
-        int numberNearesEnemy = 0;
-        for (int i = 0; i < enemies.size(); i++) {
-            double distance = position.getDistance(enemies.get(i).position);
+    protected Creature findNearest(ArrayList<Creature> creatures) {
+        double minDistance = position.getDistance(creatures.get(0).position);
+        int numberNearest = 0;
+        for (int i = 0; i < creatures.size(); i++) {
+            double distance = position.getDistance(creatures.get(i).position);
             if (distance < minDistance) {
                 minDistance = distance;
-                numberNearesEnemy = i;
+                numberNearest = i;
             }
         }
-        return enemies.get(numberNearesEnemy);
+        return creatures.get(numberNearest);
     }
 }
