@@ -16,7 +16,7 @@ public abstract class Creature implements CreaturesInterface {
     protected int initiative; // Инициатива
 
     protected Position position; // Координаты
-    protected CreaturesActions action; // Действие
+    public CreaturesActions action; // Действие
 
 
     /**
@@ -65,16 +65,16 @@ public abstract class Creature implements CreaturesInterface {
 
     public String toString() {
         return String.format("%s #%d [Кол-во: %d]",
-                name, number, qty, position.x, position.y);
+                name, number, qty);
     }
 
     public String toChar() {
-        return name.substring(0,2);
+        return name.substring(0,2) + number;
     }
 
     public String getInfo() {
         return String.format("%s #%d [Кол-во: %d]",
-                name, number, qty, position.x, position.y);
+                name, number, qty);
     }
 
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
@@ -111,15 +111,22 @@ public abstract class Creature implements CreaturesInterface {
     }
 
     protected Creature findNearest(ArrayList<Creature> creatures) {
-        double minDistance = position.getDistance(creatures.get(0).position);
-        int numberNearest = 0;
+        double minDistance = -1;
+        int numberNearest = -1;
         for (int i = 0; i < creatures.size(); i++) {
-            double distance = position.getDistance(creatures.get(i).position);
-            if (distance < minDistance) {
-                minDistance = distance;
-                numberNearest = i;
+            if(!creatures.get(i).action.equals(CreaturesActions.died)) {
+                double distance = position.getDistance(creatures.get(i).position);
+                if (minDistance == -1 || distance < minDistance) {
+                    minDistance = distance;
+                    numberNearest = i;
+                }
             }
         }
-        return creatures.get(numberNearest);
+        if (numberNearest != -1) {
+            return creatures.get(numberNearest);
+        }
+        else {
+            return null;
+        }
     }
 }

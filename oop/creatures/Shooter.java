@@ -1,5 +1,7 @@
 package oop.creatures;
 
+import oop.view.View;
+
 import java.util.ArrayList;
 
 public abstract class Shooter extends Creature {
@@ -32,29 +34,30 @@ public abstract class Shooter extends Creature {
 
     @Override
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
-        // super.step(enemies);
-        System.out.print(getInfo());
         if (hp <= 0) return;
         if (shoots <= 0) return;
 
-        Creature nearestEnemy = findNearest(enemies);
-        int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
-        nearestEnemy.doDamage(damage);
-        boolean savedShoot = false;
-        for (Creature allie: allies) {
-            if (allie.name.equals("Крестьянин") && allie.action.equals(CreaturesActions.waiting)) {
-                savedShoot = true;
-                allie.action = CreaturesActions.givesArrow;
-                break;
+        if (findNearest(enemies) != null) {
+            Creature nearestEnemy = findNearest(enemies);
+            int damage = ((maxDamage - minDamage) / 2 + minDamage);
+            nearestEnemy.doDamage(damage);
+            boolean savedShoot = false;
+            for (Creature allie : allies) {
+                if (allie.name.equals("Крестьянин") && allie.action.equals(CreaturesActions.waiting)) {
+                    savedShoot = true;
+                    allie.action = CreaturesActions.givesArrow;
+                    break;
+                }
             }
-        }
-        System.out.printf(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось стрел: %d(-%d)\n",
-                nearestEnemy.name,
-                nearestEnemy.number,
-                damage,
-                shoots,
-                savedShoot ? 0 : 1);
+            View.logMessage.addLast(getInfo() + String.format(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось стрел: %d(-%d)",
+                    nearestEnemy.name,
+                    nearestEnemy.number,
+                    damage,
+                    shoots,
+                    savedShoot ? 0 : 1));
 
-        if (savedShoot) return; else shoots--;
+            if (savedShoot) return;
+            else shoots--;
+        }
     }
 }

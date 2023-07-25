@@ -1,5 +1,7 @@
 package oop.creatures;
 
+import oop.view.View;
+
 import java.util.ArrayList;
 
 public abstract class Healer extends Shooter {
@@ -32,39 +34,45 @@ public abstract class Healer extends Shooter {
         int maxPainful = creatures.get(0).maxHp - creatures.get(0).hp;
         int numberMostPainful = 0;
         for (int i = 0; i < creatures.size(); i++) {
-            int painful = creatures.get(i).maxHp - creatures.get(i).hp;
-            if (painful > maxPainful) {
-                maxPainful = painful;
-                numberMostPainful = i;
+            if(!creatures.get(i).action.equals(CreaturesActions.died)) {
+                int painful = creatures.get(i).maxHp - creatures.get(i).hp;
+                if (painful > maxPainful) {
+                    maxPainful = painful;
+                    numberMostPainful = i;
+                }
             }
         }
-        if (maxPainful != 0) return creatures.get(numberMostPainful);
-        else return null;
+        if (maxPainful != 0) {
+            return creatures.get(numberMostPainful);
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
-        // super.step(enemies, allies);
-        System.out.print(getInfo());
 
         if (findMostPainful(allies) != null) {
             Creature mostPainful = findMostPainful(allies);
             int healingPoints = mostPainful.doHeal(healing * qty);
-            System.out.printf(" -> Вылечил: %s #%d на: %d\n",
+            View.logMessage.addLast(getInfo() + String.format(" -> Вылечил: %s #%d на: %d",
                     mostPainful.name,
                     mostPainful.number,
-                    healingPoints);
+                    healingPoints));
         }
         else {
-            Creature nearestEnemy = findNearest(enemies);
-            int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
-            nearestEnemy.doDamage(damage);
+            if (findNearest(enemies) != null) {
+                Creature nearestEnemy = findNearest(enemies);
+                int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
+                nearestEnemy.doDamage(damage);
 
-            System.out.printf(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось выстрелов: %d\n",
-                    nearestEnemy.name,
-                    nearestEnemy.number,
-                    damage,
-                    shoots);
+                View.logMessage.addLast(getInfo() + String.format(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось выстрелов: %d",
+                        nearestEnemy.name,
+                        nearestEnemy.number,
+                        damage,
+                        shoots));
+            }
         }
 
     }

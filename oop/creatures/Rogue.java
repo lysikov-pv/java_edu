@@ -1,6 +1,6 @@
 package oop.creatures;
 
-public class Rogue extends Creature {
+public class Rogue extends Warrior {
     protected static int number = 0;
 
     /**

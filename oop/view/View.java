@@ -2,16 +2,19 @@ package oop.view;
 
 import oop.creatures.Creature;
 import oop.Program;
-import oop.creatures.Creature;
 import oop.creatures.Position;
 
 import java.util.Collections;
+import java.util.LinkedList;
+
 public class View {
+
+        public static LinkedList<String> logMessage = new LinkedList<>();
         private static int step = 1;
         private static final int[] l = {0};
-        private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("--b"))) + formatDiv("--c");
-        private static final String midl10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("--e"))) + formatDiv("--f");
-        private static final String bottom10 = formatDiv("g") + String.join("", Collections.nCopies(9, formatDiv("--h"))) + formatDiv("--i");
+        private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("---b"))) + formatDiv("---c");
+        private static final String midl10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("---e"))) + formatDiv("---f");
+        private static final String bottom10 = formatDiv("g") + String.join("", Collections.nCopies(9, formatDiv("---h"))) + formatDiv("---i");
         private static void tabSetter(int cnt, int max){
             int dif = max - cnt + 2;
             if (dif>0) System.out.printf("%" + dif + "s", "\t"); else System.out.print(":\t");
@@ -29,7 +32,7 @@ public class View {
                     .replace('-', '\u2500');
         }
         private static String getChar(int x, int y){
-            String out = "|  ";
+            String out = "|   ";
             for (Creature creature: Program.allCreatures) {
                 if (creature.getPosition().equals(new Position(x, y))){
                     if (creature.getHp() == 0) {
@@ -42,6 +45,11 @@ public class View {
                 }
             }
             return out;
+        }
+        private static void printLog() {
+            while (!logMessage.isEmpty()) {
+                System.out.println(logMessage.pollFirst());
+            }
         }
         public static void view() {
             if (step == 1 ){
@@ -56,10 +64,10 @@ public class View {
             System.out.print(top10 + "    ");
             System.out.print(AnsiColors.ANSI_GREEN + "Зеленая армия" + AnsiColors.ANSI_RESET);
             //for (int i = 0; i < l[0]-9; i++)
-            System.out.print(" ".repeat(l[0]-10));
+            System.out.print(" ".repeat(l[0]-8));
             System.out.println(AnsiColors.ANSI_BLUE + "Синяя армия" + AnsiColors.ANSI_RESET);
             for (int i = 1; i < 11; i++) {
-                System.out.print(getChar(1, i));
+                System.out.print(getChar(i, 1));
             }
             System.out.print("|    ");
             System.out.print(Program.army1.get(0).getInfo());
@@ -69,7 +77,7 @@ public class View {
 
             for (int i = 2; i < 10; i++) {
                 for (int j = 1; j < 11; j++) {
-                    System.out.print(getChar(i, j));
+                    System.out.print(getChar(j, i));
                 }
                 System.out.print("|    ");
                 System.out.print(Program.army1.get(i-1).getInfo());
@@ -78,12 +86,14 @@ public class View {
                 System.out.println(midl10);
             }
             for (int j = 1; j < 11; j++) {
-                System.out.print(getChar(10, j));
+                System.out.print(getChar(j, 10));
             }
             System.out.print("|    ");
             System.out.print(Program.army1.get(9).getInfo());
             tabSetter(Program.army1.get(9).getInfo().length(), l[0]);
             System.out.println(Program.army2.get(9).getInfo());
             System.out.println(bottom10);
+
+            printLog();
         }
     }
