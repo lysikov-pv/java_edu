@@ -39,8 +39,7 @@ public abstract class Shooter extends Creature {
 
         if (findNearest(enemies) != null) {
             Creature nearestEnemy = findNearest(enemies);
-            int damage = ((maxDamage - minDamage) / 2 + minDamage);
-            nearestEnemy.doDamage(damage);
+            int qtyDies = nearestEnemy.getDamage(minDamage, maxDamage, qty, attack);
             boolean savedShoot = false;
             for (Creature allie : allies) {
                 if (allie.name.equals("Крестьянин") && allie.action.equals(CreaturesActions.waiting)) {
@@ -49,10 +48,11 @@ public abstract class Shooter extends Creature {
                     break;
                 }
             }
-            View.logMessage.addLast(getInfo() + String.format(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось стрел: %d(-%d)",
+            View.log.add(getInfo() + String.format(" атаковал «%s #%d» [\u26C9 %d(-%d)]; У него осталось стрел: %d(-%d)",
                     nearestEnemy.name,
                     nearestEnemy.number,
-                    damage,
+                    nearestEnemy.qty + qtyDies,
+                    qtyDies,
                     shoots,
                     savedShoot ? 0 : 1));
 

@@ -97,17 +97,17 @@ public abstract class Warrior extends Creature {
         if (findNearest(enemies) != null) {
             Creature nearestEnemy = findNearest(enemies);
             if (canAttack(nearestEnemy)) {
-                int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
-                nearestEnemy.doDamage(damage);
-                View.logMessage.addLast(getInfo() + String.format(" -> Атаковал: %s #%d и нанес урон: %d",
+                int qtyDies = nearestEnemy.getDamage(minDamage, maxDamage, qty, attack);
+                View.log.add(getInfo() + String.format(" атаковал «%s #%d» [\u26C9 %d(-%d)]",
                         nearestEnemy.name,
                         nearestEnemy.number,
-                        damage));
+                        nearestEnemy.qty + qtyDies,
+                        qtyDies));
             } else {
                 goTo(nearestEnemy.getPosition());
-                View.logMessage.addLast(getInfo() + String.format(" -> Сделал шаг. Новые координаты: (%d, %d)",
-                        getPosition().x,
-                        getPosition().y));
+                View.log.add(getInfo() + String.format(" идет к «%s #%d»",
+                        nearestEnemy.name,
+                        nearestEnemy.number));
             }
         }
     }

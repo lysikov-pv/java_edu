@@ -13,35 +13,35 @@ public class Program {
     public static ArrayList<Creature> army2 = new ArrayList<>();
     public static ArrayList<Creature> allCreatures = new ArrayList<>();
 
-    public static void create_army_randomly(){
+    public static void create_armys(){
         for (int i = 1; i < 11; i++) {
             switch (random.nextInt(4)){
                 case 0:
-                    army1.add(new Mage(random.nextInt(1, 21), 1, i));
+                    army1.add(new Mage(10, 1, i));
                     break;
                 case 1:
-                    army1.add(new Sharpshooter(random.nextInt(1, 31),1, i));
+                    army1.add(new Sharpshooter(5,1, i));
                     break;
                 case 2:
-                    army1.add(new Rogue(random.nextInt(1, 51),1, i));
+                    army1.add(new Rogue(100,1, i));
                     break;
                 default:
-                    army1.add(new Peasant(random.nextInt(1, 101),1, i));
+                    army1.add(new Peasant(50,1, i));
             }
         }
         for (int i = 1; i < 11; i++) {
             switch (random.nextInt(4)){
                 case 0:
-                    army2.add(new Monk(random.nextInt(1, 21), 10, i));
+                    army2.add(new Monk(10, 10, i));
                     break;
                 case 1:
-                    army2.add(new Archer(random.nextInt(1, 31), 10, i));
+                    army2.add(new Archer(10, 10, i));
                     break;
                 case 2:
-                    army2.add(new Pikeman(random.nextInt(1, 51),10, i));
+                    army2.add(new Pikeman(100,10, i));
                     break;
                 default:
-                    army2.add(new Peasant(random.nextInt(1, 101),10, i));
+                    army2.add(new Peasant(50,10, i));
             }
         }
         allCreatures.addAll(army1);
@@ -74,7 +74,7 @@ public class Program {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        create_army_randomly();
+        create_armys();
         View.view();
 
         while (whoWin() == 0) {
@@ -83,7 +83,7 @@ public class Program {
             View.view();
         }
 
-        View.logMessage.addLast(String.format("Конец игры. Победила армия %s!",
+        View.log.add(String.format("Конец игры. Победила армия %s!",
                 (whoWin() == 1) ? "зеленых" : "синих"));
         View.view();
     }

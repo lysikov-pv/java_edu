@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class View {
 
-        public static LinkedList<String> logMessage = new LinkedList<>();
+        public static LinkedList<String> log = new LinkedList<>();
         private static int step = 1;
         private static final int[] l = {0};
         private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("---b"))) + formatDiv("---c");
@@ -47,8 +47,8 @@ public class View {
             return out;
         }
         private static void printLog() {
-            while (!logMessage.isEmpty()) {
-                System.out.println(logMessage.pollFirst());
+            while (!log.isEmpty()) {
+                System.out.println(log.pollFirst());
             }
         }
         public static void view() {

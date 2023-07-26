@@ -1,6 +1,9 @@
 package oop.creatures;
 
+import oop.view.View;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Creature implements CreaturesInterface {
     protected int number; // Порядковый номер
@@ -64,29 +67,41 @@ public abstract class Creature implements CreaturesInterface {
     }
 
     public String toString() {
-        return String.format("%s #%d [Кол-во: %d]",
+        return String.format("«%s #%d» [\u26C9 %d]",
                 name, number, qty);
     }
 
     public String toChar() {
-        return name.substring(0,2) + number;
+        return name.substring(0, 2) + ((number > 10) ? number % 10 : number);
     }
 
     public String getInfo() {
-        return String.format("%s #%d [Кол-во: %d]",
+        return String.format("«%s #%d» [\u26C9 %d]",
                 name, number, qty);
     }
 
     public void step(ArrayList<Creature> enemies, ArrayList<Creature> allies) {
         Creature nearestEnemy = findNearest(enemies);
-        System.out.print(getInfo());
-        System.out.printf(" -> Ближайшее существо: %s #%d; Растояние: %d \n",
+        View.log.add(getInfo() + String.format(" -> Ближайшее существо: %s #%d; Растояние: %d",
                 nearestEnemy.name,
                 nearestEnemy.number,
-                (int)Math.ceil(position.getDistance(nearestEnemy.position)));
+                (int)Math.ceil(position.getDistance(nearestEnemy.position))));
     }
 
-    public void doDamage(int damage) {
+    private int sign(int x) {
+        if (x > 0) return 1;
+        if (x < 0) return -1;
+        return 0;
+    }
+
+    public int getDamage(int enemieMinDamage, int enemieMaxDamage, int enemieQty, int enemieAttack) {
+        // Формула расчета повреждения с handbookhmm.ru/1-damage
+        Random random = new Random();
+        int i = enemieAttack - defense;
+        int damage = (int) Math.round(
+                random.nextInt(enemieMinDamage, enemieMaxDamage + 1)
+                * enemieQty
+                * (1.0 + 0.1 * Math.pow(sign(i), Math.abs(i))));
         int qtyDamage = damage / maxHp;
         if (qtyDamage < qty) {
             qty -= qtyDamage;
@@ -95,11 +110,12 @@ public abstract class Creature implements CreaturesInterface {
         else {
             die();
         }
+        return qtyDamage;
     }
 
-    public int doHeal(int healing) {
+    public int getHeal(int healing) {
         int damage = maxHp - hp;
-        int healingPoints = (damage > healing) ? healing : damage;
+        int healingPoints = Math.min(damage, healing);
         hp += healingPoints;
         return healingPoints;
     }

@@ -55,8 +55,8 @@ public abstract class Healer extends Shooter {
 
         if (findMostPainful(allies) != null) {
             Creature mostPainful = findMostPainful(allies);
-            int healingPoints = mostPainful.doHeal(healing * qty);
-            View.logMessage.addLast(getInfo() + String.format(" -> Вылечил: %s #%d на: %d",
+            int healingPoints = mostPainful.getHeal(healing * qty);
+            View.log.add(getInfo() + String.format(" вылечил «%s #%d» на +%d HP",
                     mostPainful.name,
                     mostPainful.number,
                     healingPoints));
@@ -65,12 +65,13 @@ public abstract class Healer extends Shooter {
             if (findNearest(enemies) != null) {
                 Creature nearestEnemy = findNearest(enemies);
                 int damage = ((maxDamage - minDamage) / 2 + minDamage) * qty;
-                nearestEnemy.doDamage(damage);
-
-                View.logMessage.addLast(getInfo() + String.format(" -> Выстрелил в: %s #%d и нанес урон: %d; У него осталось выстрелов: %d",
+                int qtyDies = nearestEnemy.getDamage(minDamage, maxDamage, qty, attack);
+                shoots--;
+                View.log.add(getInfo() + String.format(" атаковал «%s #%d» [\u26C9 %d(-%d)]; У него осталось выстрелов: %d(-1)",
                         nearestEnemy.name,
                         nearestEnemy.number,
-                        damage,
+                        nearestEnemy.qty + qtyDies,
+                        qtyDies,
                         shoots));
             }
         }
