@@ -1,0 +1,4 @@
+Masha = 5
+Petr = 4
+Egor = ?
+Alexander = 9
